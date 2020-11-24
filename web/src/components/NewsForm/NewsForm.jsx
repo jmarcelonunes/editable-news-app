@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../hooks/auth';
 import firebase from '../../firebase';
+import NavBar from '../NavBar';
 
 const NewsForm = () => {
   const [title, setTitle] = useState('');
   const [subTitle, setSubtitle] = useState('');
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
-  const { signOut } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,88 +32,80 @@ const NewsForm = () => {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flex: 1,
-        height: 500,
-        width: '100%',
-        padding: 20,
-      }}
-    >
-      <div style={{ display: 'flex', flex: 1 }} />
+    <>
+      <NavBar />
       <div
         style={{
           display: 'flex',
-          flex: 2,
-          flexDirection: 'column',
-          alignItems: 'center',
-          paddingRight: 30,
+          flex: 1,
+          height: 500,
+          width: '100%',
+          padding: 20,
         }}
       >
-        <form
+        <div style={{ display: 'flex', flex: 1 }} />
+        <div
           style={{
             display: 'flex',
-            flex: 1,
+            flex: 2,
             flexDirection: 'column',
-            width: '100%',
+            alignItems: 'center',
+            paddingRight: 30,
           }}
-          onSubmit={handleSubmit}
         >
-          <input
+          <form
             style={{
+              display: 'flex',
+              flex: 1,
+              flexDirection: 'column',
               width: '100%',
-              marginBottom: 20,
             }}
-            type="text"
-            name="title"
-            placeholder="Título"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            style={{ width: '100%', marginBottom: 20 }}
-            type="text"
-            name="subTitle"
-            placeholder="SubTítulo"
-            value={subTitle}
-            onChange={(e) => setSubtitle(e.target.value)}
-          />
-          <input
-            style={{ width: '100%', marginBottom: 20 }}
-            type="text"
-            name="author"
-            placeholder="Autor"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-          <textarea
-            style={{ width: '100%', marginBottom: 20 }}
-            rows={20}
-            type="text"
-            name="body"
-            placeholder="Corpo"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-          <button style={{ width: 80 }} type="submit">
-            Submit
-          </button>
-        </form>
+            onSubmit={handleSubmit}
+          >
+            <input
+              style={{
+                width: '100%',
+                marginBottom: 20,
+              }}
+              type="text"
+              name="title"
+              placeholder="Título"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              style={{ width: '100%', marginBottom: 20 }}
+              type="text"
+              name="subTitle"
+              placeholder="SubTítulo"
+              value={subTitle}
+              onChange={(e) => setSubtitle(e.target.value)}
+            />
+            <input
+              style={{ width: '100%', marginBottom: 20 }}
+              type="text"
+              name="author"
+              placeholder="Autor"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+            />
+            <textarea
+              style={{ width: '100%', marginBottom: 20 }}
+              rows={20}
+              type="text"
+              name="body"
+              placeholder="Corpo"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+            />
+            <button style={{ width: 80 }} type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+        <div style={{ display: 'flex', flex: 1 }} />
       </div>
-      <div style={{ display: 'flex', flex: 1 }}>
-        <button
-          style={{
-            height: 20,
-            width: 80,
-          }}
-          type="button"
-          onClick={signOut}
-        >
-          Sair
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 
