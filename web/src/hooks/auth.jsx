@@ -1,4 +1,6 @@
-import React, { useState, useContext, createContext, useCallback } from 'react';
+import React, {
+  useState, useContext, createContext, useCallback,
+} from 'react';
 import firebase from '../firebase';
 
 const AuthContext = createContext();
@@ -106,7 +108,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser, signUp }}
+      value={{
+        user: data.user, signIn, signOut, updateUser, signUp,
+      }}
     >
       {children}
     </AuthContext.Provider>

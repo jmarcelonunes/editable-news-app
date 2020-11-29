@@ -7,18 +7,16 @@ const Route = ({ isPrivate = false, component: Component, ...rest }) => {
   return (
     <ReactDOMRoute
       {...rest}
-      render={({ location }) => {
-        return isPrivate === !!user ? (
-          <Component />
-        ) : (
-          <Redirect
-            to={{
-              pathname: isPrivate ? '/' : '/registerNews',
-              state: { from: location },
-            }}
-          />
-        );
-      }}
+      render={({ location }) => (isPrivate === !!user ? (
+        <Component />
+      ) : (
+        <Redirect
+          to={{
+            pathname: isPrivate ? '/' : '/registerNews',
+            state: { from: location },
+          }}
+        />
+      ))}
     />
   );
 };
