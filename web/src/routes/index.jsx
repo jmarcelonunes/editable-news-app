@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
 import NewsForm from '../components/NewsForm/index';
-import SignUp from '../components/SignUp';
+import SignUp from '../components/SignUp/index';
 import SignIn from '../components/SignIn/index';
 import News from '../components/News';
 
