@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import firebase from '../../firebase';
 import NavBar from '../NavBar';
+import { Form, MainContainer, PaddingContainer, Input, FormContainer } from './style';
 
 const NewsForm = () => {
   const [title, setTitle] = useState('');
@@ -34,55 +35,25 @@ const NewsForm = () => {
   return (
     <>
       <NavBar />
-      <div
-        style={{
-          display: 'flex',
-          flex: 1,
-          height: 500,
-          width: '100%',
-          padding: 20,
-        }}
-      >
-        <div style={{ display: 'flex', flex: 1 }} />
-        <div
-          style={{
-            display: 'flex',
-            flex: 2,
-            flexDirection: 'column',
-            alignItems: 'center',
-            paddingRight: 30,
-          }}
-        >
-          <form
-            style={{
-              display: 'flex',
-              flex: 1,
-              flexDirection: 'column',
-              width: '100%',
-            }}
-            onSubmit={handleSubmit}
-          >
-            <input
-              style={{
-                width: '100%',
-                marginBottom: 20,
-              }}
+      <MainContainer>
+        <PaddingContainer />
+        <FormContainer>
+          <Form onSubmit={handleSubmit}>
+            <Input
               type="text"
               name="title"
               placeholder="Título"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <input
-              style={{ width: '100%', marginBottom: 20 }}
+            <Input
               type="text"
               name="subTitle"
               placeholder="SubTítulo"
               value={subTitle}
               onChange={(e) => setSubtitle(e.target.value)}
             />
-            <input
-              style={{ width: '100%', marginBottom: 20 }}
+            <Input
               type="text"
               name="author"
               placeholder="Autor"
@@ -101,10 +72,10 @@ const NewsForm = () => {
             <button style={{ width: 80 }} type="submit">
               Submit
             </button>
-          </form>
-        </div>
-        <div style={{ display: 'flex', flex: 1 }} />
-      </div>
+          </Form>
+        </FormContainer>
+        <PaddingContainer />
+      </MainContainer>
     </>
   );
 };
