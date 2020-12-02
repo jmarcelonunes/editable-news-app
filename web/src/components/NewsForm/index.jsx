@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import firebase from '../../firebase';
 import NavBar from '../NavBar';
-import { Form, MainContainer, PaddingContainer, Input, FormContainer } from './style';
+import {
+  Form, MainContainer, PaddingContainer, Input, FormContainer,
+} from './style';
 
 const NewsForm = () => {
   const [title, setTitle] = useState('');
