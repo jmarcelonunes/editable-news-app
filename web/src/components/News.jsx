@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase';
-import NavBar from './NavBar';
+import NavBar from './NavBar/index';
 
 const News = () => {
   const [noticias, setNoticias] = useState([]);
@@ -58,8 +58,8 @@ const News = () => {
                   width: '100%',
                   marginBottom: 20,
                   borderBottomWidth: 2,
-                  borderBottomColor: 'gray',
                   borderBottomStyle: 'solid',
+                  borderBottomColor: '#005484',
                 }}
               >
                 <h2 style={{ margin: 0 }}>{noticia.titulo}</h2>
