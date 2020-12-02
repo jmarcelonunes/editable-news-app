@@ -26,5 +26,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-duplicates': 'off',
     camelcase: 'off',
+    'linebreak-style': ['error', 'unix'],
   },
 };
