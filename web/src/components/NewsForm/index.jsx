@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import firebase from '../../firebase';
-import NavBar from '../NavBar';
+import NavBar from '../NavBar/index';
 import {
-  Form, MainContainer, PaddingContainer, Input, FormContainer,
+  Form, MainContainer, PaddingContainer, Input, FormContainer, Container, SubmitButton, NewsInput,
 } from './style';
 
 const NewsForm = () => {
@@ -35,7 +35,7 @@ const NewsForm = () => {
   }
 
   return (
-    <>
+    <Container>
       <NavBar />
       <MainContainer>
         <PaddingContainer />
@@ -62,8 +62,7 @@ const NewsForm = () => {
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
             />
-            <textarea
-              style={{ width: '100%', marginBottom: 20 }}
+            <NewsInput
               rows={20}
               type="text"
               name="body"
@@ -71,14 +70,14 @@ const NewsForm = () => {
               value={body}
               onChange={(e) => setBody(e.target.value)}
             />
-            <button style={{ width: 80 }} type="submit">
-              Submit
-            </button>
+            <SubmitButton type="submit">
+              Cadastrar
+            </SubmitButton>
           </Form>
         </FormContainer>
         <PaddingContainer />
       </MainContainer>
-    </>
+    </Container>
   );
 };
 

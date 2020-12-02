@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  height: 100vh;
+  margin: 0px;
+`;
+
 export const MainContainer = styled.div`
     display: flex;
     flex: 1;
@@ -31,4 +36,20 @@ export const Form = styled.form`
 export const Input = styled.input`
     width: 100%;
     margin-bottom: 20px;
+    border-color: #005484;
+    border-style: solid;
+`;
+
+export const NewsInput = styled.textarea`
+    width: 100%;
+    margin-bottom: 20px;
+    border-color: #005484;
+    border-style: solid;
+    border-width: 2px;
+`;
+
+export const SubmitButton = styled.button`
+    width: 80px;
+    background-color: #005484;
+    color: white;
 `;
