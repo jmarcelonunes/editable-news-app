@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import firebase from '../../firebase';
 import NavBar from '../NavBar/index';
 import {
@@ -6,10 +7,37 @@ import {
 } from './style';
 
 const NewsForm = () => {
+  const { id } = useParams();
   const [title, setTitle] = useState('');
   const [subTitle, setSubtitle] = useState('');
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('');
+
+  useEffect(() => {
+    async function fetch() {
+      if (id) {
+        const db = firebase.firestore();
+        try {
+          let data = await db.collection('noticias').doc(id).get();
+          data = data.data();
+          setTitle(data.titulo);
+          setSubtitle(data.subtitulo);
+          setBody(data.corpo);
+          setAuthor(data.autor);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    fetch();
+  }, [id]);
+
+  function clearFields() {
+    setTitle('');
+    setSubtitle('');
+    setBody('');
+    setAuthor('');
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,10 +51,7 @@ const NewsForm = () => {
         subtitulo: subTitle,
         titulo: title,
       });
-      setTitle('');
-      setSubtitle('');
-      setBody('');
-      setAuthor('');
+      clearFields();
       alert('Notícia cadastrada com sucesso!');
     } catch (err) {
       console.log(err);

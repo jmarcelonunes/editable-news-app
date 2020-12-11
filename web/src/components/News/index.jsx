@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import firebase from '../firebase';
-import NavBar from './NavBar/index';
+import { Link } from 'react-router-dom';
+import { DeleteButton } from './style';
+import NavBar from '../NavBar/index';
+import firebase from '../../firebase';
 
 const News = () => {
   const [noticias, setNoticias] = useState([]);
@@ -21,6 +23,18 @@ const News = () => {
       setNoticias(noticiasFirestore);
     });
   }, []);
+
+  async function deleteNews(id) {
+    const db = firebase.firestore();
+    try {
+      await db.collection('noticias').doc(id).delete();
+      alert('Notícia excluída com sucesso!');
+      // Necessita fazer a atualizacao do estado
+    } catch (err) {
+      console.log(err);
+      alert('Erro ao excluída notícia', err);
+    }
+  }
 
   return (
     <>
@@ -52,6 +66,7 @@ const News = () => {
           {noticias && noticias.length ? (
             noticias.map((noticia) => (
               <div
+                key={noticia.id}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -68,6 +83,12 @@ const News = () => {
                   Escrito por: {noticia.autor}
                 </p>
                 <h3 style={{ margin: 0 }}>{noticia.corpo}</h3>
+                <div>
+                  <DeleteButton type="button" onClick={() => deleteNews(noticia.id)}>Excluir</DeleteButton>
+                  <Link style={{ textDecoration: 'none' }} to={`/registerNews/${noticia.id}`}>
+                    <button type="button">Editar</button>
+                  </Link>
+                </div>
               </div>
             ))
           ) : (
