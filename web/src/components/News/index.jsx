@@ -4,9 +4,28 @@ import { DeleteButton } from './style';
 import NavBar from '../NavBar/index';
 import firebase from '../../firebase';
 
+/**
+ * Componente para a página de visualização de notícias
+ * @component
+ *
+ */
 const News = () => {
+  /**
+   * Declaração do estado de noticias
+   */
   const [noticias, setNoticias] = useState([]);
 
+  /**
+   * Hook useEffect para realizar o get de todas as notícias do banco de dados
+   *
+   * Assertiva de entrada
+   * Recebe uma arrow function responsável pelo get de todas as noticias no firebase
+   * Array vazia
+   *
+   * Assertiva de saída
+   * Todos as noticias devem estar contidas na array noticiasFirestore e consequentemente
+   * devem estar presentes no estado "noticias"
+   */
   useEffect(() => {
     const db = firebase.firestore();
 
@@ -24,6 +43,16 @@ const News = () => {
     });
   }, []);
 
+  /**
+   * deleteNews - Função utilizada para realizar a exclusão de alguma notícia
+   *
+   * Assertiva de entrada
+   * @param {string} id recebe o id da notícia a ser excluída
+   * id != null
+   *
+   * Assertiva de saída
+   *
+   */
   const deleteNews = useCallback(async (id) => {
     const db = firebase.firestore();
     try {
@@ -38,6 +67,9 @@ const News = () => {
     }
   }, [setNoticias]);
 
+  /**
+   * Retorno do componente, retorna todas as notícias
+   */
   return (
     <>
       <NavBar />

@@ -4,12 +4,38 @@ import {
   SignUpButton, SignUpForm, SignUpText, Container, SignUpInput, Content,
 } from './style';
 
+/**
+ * Componente para a página de cadastro de usuário
+ * @component
+ *
+ */
 const SignUp = () => {
   const { signUp } = useAuth();
+  /**
+   * Declara estado para o username do usuário
+   */
   const [userName, setUserName] = useState('');
+  /**
+   * Declara estado para a senha do usuário
+   */
   const [password, setPassword] = useState('');
+  /**
+   * Declara estado para o email do usuário
+   */
   const [email, setEmail] = useState('');
 
+  /**
+   * handleSubmit - função responsável pelo envio do formulário de cadastro de usuário
+   *
+   * Assertiva de entrada
+   * @param {*} e evento do formulário
+   * e != null
+   *
+   * Assertiva de saída
+   * Deve-se esperar que os dados do formulário sejam enviados para o hook signUp
+   * responsável pelo cadastro de usuário no firebase. Feito isso, caso o resultado seja positivo,
+   * o usuário possuirá um login disponível.
+   */
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -24,6 +50,9 @@ const SignUp = () => {
     }
   }
 
+  /**
+   * Retorno do componente contendo o formulário do cadastro de usuários.
+   */
   return (
     <Container>
       <Content>

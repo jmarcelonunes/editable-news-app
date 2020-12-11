@@ -4,20 +4,53 @@ import React, {
 import firebase from '../firebase';
 
 const AuthContext = createContext();
-
+/**
+ * Hook responsável pela comunicação com o firebase para a autenticação de usuários
+ * @hook
+ *
+ */
 export const AuthProvider = ({ children }) => {
+  /**
+   * Funcionalidade responsável por adquirir os dados do usuário que se encontram em localstorage
+   *
+   * Assertivas de entrada
+   * Não há parametros de entreda
+   *
+   * Assertivas de saída
+   *
+   * Ao final da execução o retorno deve ser nulo em caso de não haver usuário logado
+   * ou o objeto com os dados do usuário caso haja algum usuário logado
+   */
   const [data, setData] = useState(() => {
     // const token = localStorage.getItem('@editable-news-app:token');
     const user = localStorage.getItem('@editable-news-app:user');
+    /**
+     * User é atribuido ao valor adquirido em localStorage
+     */
 
     if (/* token && */ user) {
       // api.defaults.headers.authorization = `Bearer ${token}`;
+      /**
+       * Caso user esteja logado, retorna os dados do usuário
+       */
       return { /* token, */ user: JSON.parse(user) };
     }
 
     return {};
   });
 
+  /**
+   * signIn - Função responsável pelo envio dos dados
+   * do usuário ao firebase para efetuar a validação e login.
+   *
+   * Assertivas de entrada
+   * @param {string, string} data dados do usuário (email e senha)
+   * email != null
+   * password != null
+   *
+   * Assertivas de saída
+   * Ao final da execução, o localStorage deve estar populado com os dados do usuário
+   */
   const signIn = useCallback(
     async ({ email, password }) => {
       try {
@@ -44,7 +77,17 @@ export const AuthProvider = ({ children }) => {
     },
     [setData],
   );
-
+  /**
+   * signOut - Função responsável pelo logout do usuário, é feita a
+   * comunicação com o firebase para realizar a autenticação do logout
+   *
+   * Assertiva de entrada
+   * Não recebe parâmetros
+   *
+   * Assertiva de saída
+   * É esperado que ao final da execução da função, os usuário seja deslogado e
+   * o localStorage seja limpo, ou seja, fique sem os dados do usuário.
+   */
   const signOut = useCallback(async () => {
     try {
       await firebase.auth().signOut();
@@ -64,7 +107,20 @@ export const AuthProvider = ({ children }) => {
     },
     [setData],
   );
-
+  /**
+  * signUp - Função responsável pelo envio de dados de um novo usuário ao firebase
+  *
+  * Assertivas de entrada
+  * @param {object} inputData Dados do novo usuário
+  * inputData != null
+  *
+  * Assertivas de saída
+  * Ao final da execução o usuário deve possuir um novo cadastro.
+  * Deve ser redirecionado para a página de noticias
+  * Deve possuir seus dados não privados salvos em localStorage
+  *
+  *
+  */
   const signUp = useCallback(
     async (inputData) => {
       const signUpData = inputData;
