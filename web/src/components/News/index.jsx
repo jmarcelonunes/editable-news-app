@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { DeleteButton } from './style';
 import NavBar from '../NavBar/index';
@@ -13,7 +13,7 @@ const News = () => {
     const collection = db.collection('noticias');
 
     const noticiasFirestore = [];
-    collection.onSnapshot((querySnapshot) => {
+    collection.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         noticiasFirestore.push({
           id: doc.id,
@@ -24,17 +24,19 @@ const News = () => {
     });
   }, []);
 
-  async function deleteNews(id) {
+  const deleteNews = useCallback(async (id) => {
     const db = firebase.firestore();
     try {
       await db.collection('noticias').doc(id).delete();
       alert('Notícia excluída com sucesso!');
+      // const arrayAux = noticias.filter((noticia) => noticia.id !== id);
+      setNoticias((n) => n.filter((noticia) => noticia.id !== id));
       // Necessita fazer a atualizacao do estado
     } catch (err) {
       console.log(err);
       alert('Erro ao excluída notícia', err);
     }
-  }
+  }, [setNoticias]);
 
   return (
     <>
