@@ -6,7 +6,7 @@ const NavBar = () => {
   const { signOut } = useAuth();
 
   return (
-    <Container>
+    <Container data-testid="navbar">
       <div
         style={{
           display: 'flex',

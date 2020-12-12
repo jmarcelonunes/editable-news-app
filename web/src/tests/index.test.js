@@ -1,6 +1,9 @@
 import FirestoreMock from '../testHelpers/firestore.js';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { render } from "../customRender";
+import "@testing-library/jest-dom/extend-expect";
+import NavBar from '../components/NavBar/index.jsx';
 
 describe('Firebase test suite', () => {
   it('adds news without crashing', (done) => {
@@ -122,3 +125,10 @@ describe('Firebase test suite', () => {
     done()
   })
 })
+
+describe("<App />", () => {
+  it("Renders <NavBar /> component correctly ", () => {
+    const { getByTestId } = render(<NavBar />);
+    expect(getByTestId("navbar")).toHaveTextContent("Notícias");
+  });
+});
