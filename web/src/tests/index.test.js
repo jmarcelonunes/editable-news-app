@@ -29,4 +29,29 @@ describe('Firebase test suite', () => {
       })
       .catch(done)
   })
+  
+  it('reads news without crashing', (done) => {
+    const firestoreMock = new FirestoreMock();
+    firebase.firestore = firestoreMock;
+    firestoreMock.reset();
+
+    firestoreMock.mockGetReturn = { id: 'get-test-id' }
+    firebase.firestore.collection('noticias')
+      .add({
+        autor: 'autor teste',
+        corpo: 'corpo teste',
+        subtitulo: 'subtitulo teste',
+        titulo: 'titulo teste'
+      })
+
+    firebase.firestore.collection('noticias')
+      .get()
+      .then(res => {
+        expect(firestoreMock.mockCollection).toBeCalledWith('noticias')
+        expect(firestoreMock.mockGet).toBeCalledWith()
+        expect(res.id).toEqual('get-test-id')
+        done()
+      })
+      .catch(done)
+  })
 })
