@@ -79,4 +79,18 @@ describe('Firebase test suite', () => {
       })
       .catch(done)
   })
+
+  it('signin to firebase is called', (done) => {
+    const firestoreMock = new FirestoreMock();
+    firebase.auth = firestoreMock.mockAuth;
+    firestoreMock.reset();
+
+    firestoreMock.mockAuthReturn = { id: 'auth-test-id' }
+    firebase
+    .auth()
+    .signInWithEmailAndPassword
+
+    expect(firestoreMock.mockAuth).toHaveBeenCalled()
+    done()
+  })
 })

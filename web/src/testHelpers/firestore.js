@@ -1,5 +1,19 @@
 export default class FirestoreMock {
   constructor () {
+    const authObjectMock = {
+      createUserAndRetrieveDataWithEmailAndPassword: jest.fn(() => Promise.resolve(true)),
+      signInWithEmailAndPassword: jest.fn(() => Promise.resolve(true)),
+      sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
+      signInAndRetrieveDataWithEmailAndPassword: jest.fn(() => Promise.resolve(true)),
+      fetchSignInMethodsForEmail: jest.fn(() => Promise.resolve(true)),
+      signOut: jest.fn(() => {
+        Promise.resolve(true);
+      }),
+      onAuthStateChanged: jest.fn(),
+      currentUser: {
+        sendEmailVerification: jest.fn(() => Promise.resolve(true)),
+      },
+    };
     // mocked methods that return the class
     this.mockCollection = jest.fn(() => this)
     this.mockWhere = jest.fn(() => this)
@@ -9,6 +23,7 @@ export default class FirestoreMock {
     this.mockAdd = jest.fn(() => Promise.resolve(this._mockAddReturn))
     this.mockGet = jest.fn(() => Promise.resolve(this._mockGetReturn))
     this.mockDelete = jest.fn(() => Promise.resolve(this._mockDeleteReturn))
+    this.mockAuth = jest.fn(() => authObjectMock);
 
     // methods that accepts callbacks
     this.mockOnSnaptshot = jest.fn((success, error) => success(this._mockOnSnaptshotSuccess))
@@ -17,6 +32,7 @@ export default class FirestoreMock {
     this._mockAddReturn = null
     this._mockGetReturn = null
     this._mockDeleteReturn = null
+    this._mockAuthReturn = null
     this._mockOnSnaptshotSuccess = null
   }
 
@@ -44,8 +60,12 @@ export default class FirestoreMock {
     return this.mockOnSnaptshot(success, error)
   }
 
-  delete (id) {
+  delete () {
     return this.mockDelete()
+  }
+
+  auth () {
+    return this.mockAuth()
   }
 
   set mockAddReturn (val) {
@@ -60,6 +80,10 @@ export default class FirestoreMock {
     this._mockDeleteReturn = val
   }
 
+  set mockAuthReturn (val) {
+    this._mockAuthReturn = val
+  }
+
   set mockOnSnaptshotSuccess (val) {
     this._mockOnSnaptshotSuccess = val
   }
@@ -69,6 +93,7 @@ export default class FirestoreMock {
     this._mockAddReturn = null
     this._mockGetReturn = null
     this._mockDeleteReturn = null
+    this._mockAuthReturn = null
     this._mockOnSnaptshotSuccess = null
 
     // reset all the mocked functions
@@ -78,5 +103,6 @@ export default class FirestoreMock {
     this.mockAdd.mockClear()
     this.mockGet.mockClear()
     this.mockDelete.mockClear()
+    this.mockAuth.mockClear()
   }
 }
