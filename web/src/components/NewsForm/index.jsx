@@ -99,6 +99,10 @@ const NewsForm = () => {
      * Limpa o estado do autor
      */
     setAuthor('');
+    /**
+     * Limpa o estado da visualização de dropzone
+     */
+    setShowDropzone(true);
   }
 
   useEffect(() => {
@@ -187,6 +191,7 @@ const NewsForm = () => {
                 subtitulo: subTitle,
                 titulo: title,
                 imgURL: url,
+                timestamp: Math.floor(Date.now() / 1000),
               })
               .then(() => {
               });
@@ -201,6 +206,7 @@ const NewsForm = () => {
             corpo: body,
             subtitulo: subTitle,
             titulo: title,
+            timestamp: Math.floor(Date.now() / 1000),
           });
         }
         /**
@@ -282,6 +288,7 @@ const NewsForm = () => {
             <TextField
               id="title"
               label="Título"
+              required
               value={title}
               variant="outlined"
               onChange={(e) => setTitle(e.target.value)}
@@ -298,6 +305,7 @@ const NewsForm = () => {
             <TextField
               id="author"
               label="Autor"
+              required
               value={author}
               variant="outlined"
               onChange={(e) => setAuthor(e.target.value)}
@@ -306,6 +314,7 @@ const NewsForm = () => {
             <TextField
               id="body"
               label="Corpo da notícia"
+              required
               multiline
               rows={10}
               value={body}
