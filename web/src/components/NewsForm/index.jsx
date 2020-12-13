@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
+import TextField from '@material-ui/core/TextField';
 import firebase from '../../firebase';
 import NavBar from '../NavBar/index';
 import {
-  Form, MainContainer, PaddingContainer, Input,
-  FormContainer, Container, SubmitButton, NewsInput, DropDiv,
+  Form, MainContainer, PaddingContainer,
+  FormContainer, Container, DropDiv, SubmitButton,
 } from './style';
 
 /**
@@ -63,6 +64,35 @@ const NewsForm = () => {
     </li>
   ));
 
+  /**
+   * clearFields - Função utilizada para limpar os campos do formulário após o envio do mesmo
+   *
+   * Assertiva de entrada
+   * Não possui argumentos de entrada
+   *
+   * Assertiva de saída
+   * Os dados da notícia no formulário devem ser limpos.
+   *
+   */
+  function clearFields() {
+    /**
+     * Limpa o estado do título
+     */
+    setTitle('');
+    /**
+     * Limpa o estado do subtítulo
+     */
+    setSubtitle('');
+    /**
+     * Limpa o estado do corpo
+     */
+    setBody('');
+    /**
+     * Limpa o estado do autor
+     */
+    setAuthor('');
+  }
+
   useEffect(() => {
     /**
      * fetch() - Função responsável pela busca de uma notícia no banco de dados
@@ -95,36 +125,12 @@ const NewsForm = () => {
       }
     }
     fetch();
+
+    return () => {
+      clearFields();
+    };
   }, [id]);
 
-  /**
-   * clearFields - Função utilizada para limpar os campos do formulário após o envio do mesmo
-   *
-   * Assertiva de entrada
-   * Não possui argumentos de entrada
-   *
-   * Assertiva de saída
-   * Os dados da notícia no formulário devem ser limpos.
-   *
-   */
-  function clearFields() {
-    /**
-     * Limpa o estado do título
-     */
-    setTitle('');
-    /**
-     * Limpa o estado do subtítulo
-     */
-    setSubtitle('');
-    /**
-     * Limpa o estado do corpo
-     */
-    setBody('');
-    /**
-     * Limpa o estado do autor
-     */
-    setAuthor('');
-  }
   /**
    * handleSubmit - função responsável pelo envio dos dados do formulário
    * para o banco de dados
@@ -205,37 +211,39 @@ const NewsForm = () => {
         <PaddingContainer />
         <FormContainer>
           <Form onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              name="title"
-              placeholder="Título"
+            <TextField
+              id="title"
+              label="Título"
               value={title}
-              required
+              variant="outlined"
               onChange={(e) => setTitle(e.target.value)}
+              style={{ marginBottom: 10 }}
             />
-            <Input
-              type="text"
-              name="subTitle"
-              placeholder="SubTítulo"
+            <TextField
+              id="subtitle"
+              label="Subtítulo"
               value={subTitle}
+              variant="outlined"
               onChange={(e) => setSubtitle(e.target.value)}
+              style={{ marginBottom: 10 }}
             />
-            <Input
-              type="text"
-              name="author"
-              placeholder="Autor"
+            <TextField
+              id="author"
+              label="Autor"
               value={author}
-              required
+              variant="outlined"
               onChange={(e) => setAuthor(e.target.value)}
+              style={{ marginBottom: 10 }}
             />
-            <NewsInput
-              rows={20}
-              type="text"
-              name="body"
-              placeholder="Corpo"
+            <TextField
+              id="body"
+              label="Corpo da notícia"
+              multiline
+              rows={10}
               value={body}
-              required
+              variant="outlined"
               onChange={(e) => setBody(e.target.value)}
+              style={{ marginBottom: 10 }}
             />
             <DropDiv {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
               <input {...getInputProps()} />

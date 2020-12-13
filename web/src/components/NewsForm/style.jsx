@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
 const getColor = (props) => {
@@ -56,23 +57,8 @@ export const Form = styled.form`
     width: 100%;
 `;
 
-export const Input = styled.input`
-    width: 100%;
-    margin-bottom: 20px;
-    border-color: #005484;
-    border-style: solid;
-`;
-
-export const NewsInput = styled.textarea`
-    width: 100%;
-    margin-bottom: 20px;
-    border-color: #005484;
-    border-style: solid;
-    border-width: 2px;
-`;
-
-export const SubmitButton = styled.button`
-    width: 80px;
-    background-color: #005484;
-    color: white;
+export const SubmitButton = styled(Button)`
+  width: 120px !important;
+  background-color: #005484 !important;
+  color: white !important;
 `;
