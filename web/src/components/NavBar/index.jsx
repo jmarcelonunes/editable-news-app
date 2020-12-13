@@ -10,7 +10,7 @@ import { NavItem } from './style';
 const NavBar = () => {
   const { signOut } = useAuth();
   return (
-    <AppBar position="static" style={{ backgroundColor: '#005484' }}>
+    <AppBar data-testid="navbar" position="static" style={{ backgroundColor: '#005484' }}>
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
           <Button color="inherit">
