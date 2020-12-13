@@ -164,56 +164,107 @@ const NewsForm = () => {
    */
   async function handleSubmit(e) {
     e.preventDefault();
-
     const db = firebase.firestore();
     const storage = firebase.storage();
-    try {
+    if (!id) {
+      try {
       /**
        * Checagem para ver se alguma imagem foi carregada pelo usuário
        */
-      if (acceptedFiles[0] && !showDropzone) {
+        if (acceptedFiles[0] && !showDropzone) {
         /**
          * Caso o usuário tenha carregado a imagem,
          * a imagem é salva no storage e depois a url
          * do storage é relacionada com a notícia no firestore
          */
-        await storage.ref(`/imagens/${acceptedFiles[0].name}`).put(acceptedFiles[0]);
-        storage.ref('imagens').child(acceptedFiles[0].name).getDownloadURL().then((url) => {
-          db
-            .collection('noticias')
-            .add({
-              autor: author,
-              corpo: body,
-              subtitulo: subTitle,
-              titulo: title,
-              imgURL: url,
-            })
-            .then(() => {
-            });
-        });
-      } else {
+          await storage.ref(`/imagens/${acceptedFiles[0].name}`).put(acceptedFiles[0]);
+          storage.ref('imagens').child(acceptedFiles[0].name).getDownloadURL().then((url) => {
+            db
+              .collection('noticias')
+              .add({
+                autor: author,
+                corpo: body,
+                subtitulo: subTitle,
+                titulo: title,
+                imgURL: url,
+              })
+              .then(() => {
+              });
+          });
+        } else {
         /**
          * Caso o usuário não tenha carregado a imagem,
          * a noticía é salva no firestore sem imagem relacionada a ela
          */
-        await db.collection('noticias').add({
-          autor: author,
-          corpo: body,
-          subtitulo: subTitle,
-          titulo: title,
-        });
-      }
-      /**
+          await db.collection('noticias').add({
+            autor: author,
+            corpo: body,
+            subtitulo: subTitle,
+            titulo: title,
+          });
+        }
+        /**
        * Em caso de sucesso, todos os campos são limpos com a função clearFields
        */
-      clearFields();
-      alert('Notícia cadastrada com sucesso!');
-    } catch (err) {
+        clearFields();
+        alert('Notícia cadastrada com sucesso!');
+      } catch (err) {
       /**
        * Em caso de erro, aviso de erro e console.log com o erro em si.
        */
-      console.log(err);
-      alert('Erro ao cadastrar notícia', err);
+        console.log(err);
+        alert('Erro ao cadastrar notícia', err);
+      }
+    } else {
+      try {
+      /**
+       * Checagem para ver se alguma imagem foi carregada pelo usuário
+       */
+        if (acceptedFiles[0] && !showDropzone) {
+        /**
+         * Caso o usuário tenha carregado a imagem,
+         * a imagem é salva no storage e depois a url
+         * do storage é relacionada com a notícia no firestore
+         */
+          await storage.ref(`/imagens/${acceptedFiles[0].name}`).put(acceptedFiles[0]);
+          storage.ref('imagens').child(acceptedFiles[0].name).getDownloadURL().then((url) => {
+            db
+              .collection('noticias')
+              .doc(id)
+              .update({
+                autor: author,
+                corpo: body,
+                subtitulo: subTitle,
+                titulo: title,
+                imgURL: url,
+              })
+              .then(() => {
+              });
+          });
+        } else {
+        /**
+         * Caso o usuário não tenha carregado a imagem,
+         * a noticía é salva no firestore sem imagem relacionada a ela
+         */
+          await db.collection('noticias').doc(id).update({
+            autor: author,
+            corpo: body,
+            subtitulo: subTitle,
+            titulo: title,
+          });
+        }
+        /**
+       * Em caso de sucesso, todos os campos são limpos com a função clearFields
+       */
+        clearFields();
+        alert('Notícia editada com sucesso!');
+      } catch (err) {
+      /**
+       * Em caso de erro, aviso de erro e console.log com o erro em si.
+       */
+        console.log(err);
+        alert('Erro ao editar notícia', err);
+      }
     }
   }
 
