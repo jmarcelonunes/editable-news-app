@@ -1,0 +1,24 @@
+Data	|	Horas Trabalhadas	|	Tipo Tarefa			| 	Descrição da Tarefa Realizada
+	
+2/12	|	2:30h			|	Codificar módulo;		|	Implementação do design da primeira versão da interface para todas as páginas;
+
+2/12	|	2:10h		    	|	Codificar módulo;		|	Implementação e estilização inicial de componente de navegação global;
+
+
+12/12	|	5:30h			|	Estudar aulas e 		|	Estudo a respeito de implementação de mock para realizar testes
+	|				|	laboratórios relacionados; 	|	no firebase;
+	|				|	Projetar;			|	Instalação de biblioteca de teste Jest e dependências;
+	|				|	Redigir casos de teste;		|	Implementação de testes de funcionalidade com Jest;
+	|				|	Redigir casos de teste;		|	Implementação de testes de renderização com Jest;
+	|				|	Realizar os testes;		|	Execução de testes;
+	|				|	Instrumentar verificando	|	Verificação de cobertura do código;
+	|				|	a cobertura;			|	
+
+12/12	|	2:00h			|	Codificar módulo;		|	Implementação do novo layout em todo o site utilizando Material-UI;
+	|				|	Codificar módulo;		|	Implementação de visualização de imagens nas notícias;
+	|				|	Codificar módulo;	 	|	Opção de cancelamento da imagem selecionada para o upload;
+	|				|	Revisar código do módulo;	|	Adição de janelas de erro para o usuário e confirmação de exclusão de notícias;
+
+13/12	|	1:00h			|	Codificar módulo;		|	Implementação de timestamp no cadastro de notícias;
+	|				|	Revisar código do módulo;	|	Ordenação de notícias por timestamp;
+	|				|	Revisar código do módulo;	|	Adição de obrigatoriedade em campos do cadastro;
