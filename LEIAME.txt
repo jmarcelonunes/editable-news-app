@@ -1,0 +1,76 @@
+PROGRAMA
+Passo 1 - Caso não possua, instalar o nodeJs: https://nodejs.org/pt-br/
+Passo 2 - Caso não possua, instalar o yarn: https://yarnpkg.com/
+Passo 3 - Clone o repositório no link https://github.com/jmarcelonunes/editable-news-app 
+OU descompacte a pasta editable-news-app
+Passo 4 - No terminal, navegue até a o diretório web. 
+Passo 5 - No terminal, digite yarn install.
+Passo 6 - No terminal, digite yarn start.
+Passo 7 - O programa deve iniciar em uma janela do browser.
+
+
+BANCO DE DADOS
+Passo 1 - Para entrar e verificar o banco de dados, 
+acesse: https://firebase.google.com/?hl=pt-br
+Passo 2 - Entre com as seguintes credenciais: email: mpfirebase2020@gmail.com
+senha: MpFirebase2020!@
+Passo 3 - Clique no canto superior direito "Ir para o console"
+Passo 4 - Clique na caixa com o projeto "editable-news-app"
+Passo 5 - No menu lateral, acesse o cloud firestore para obter os dados do banco de dados.
+
+
+TESTES
+Passo 1 - No terminal, dentro do diretório web, rode o comando yarn test;
+Passo 2 - Caso deseje obter informações de cobertura, rode o comando yarn test --coverage
+Passo 3 - Caso a mensagem "No tests found related to files changed since last commit." digite a letra a.
+
+ESTRUTURA DE DIRETÓRIOS:
+
+editable-news-app
+-- web
+---- node-modules (modulos node que foram utilizados)
+---- src (source)
+
+------ customRender.jsx - permite a realização de testes de interface com a utilização de 			      autenticação
+
+------ firebase.js - arquivo de configuração com as credenciais do firebase
+
+------ app.jsx - arquivo inicial de renderização da aplicação (Se assemelha a uma main)
+
+------ index.jsx - arquivo inicial do reactJs.
+
+------ components
+-------- NavBar (componente para o menu superior)
+---------- index.jsx (componente para a navbar )
+---------- style.jsx (estilos para a navbar)
+-------- News (componente para a página de noticias)
+---------- index.jsx (componente para a página de de noticias)
+---------- style.jsx (estilos para a página de de noticias)
+-------- NewsForm (componente para a página de cadastro de noticias)
+---------- index.jsx (componente para a página de cadastro de noticias)
+---------- style.jsx (estilos para a página de cadastro de noticias)
+-------- SignIn (componente para a página de login)
+---------- index.jsx (componente para a página de login)
+---------- style.jsx (estilos para a página de login)
+-------- SignUp (componente para a página de cadastro)
+---------- index.jsx (componente para a página de cadastro)
+---------- style.jsx (estilos para a página de cadastro)
+
+------ routes (Configuração do roteamento)
+-------- auth.jsx (implementação de todos as rotas da aplicação)
+-------- index.jsx (modularização para a exportação das rotas implementadas)
+
+------ styles (Estilo global para a aplicação)
+-------- global.jsx (Implementa todo o estilo global da aplicação)
+
+------ hooks (Implementação de hooks para autenticação do usuário)
+-------- auth.jsx (implementação de todos os hooks de autenticação)
+-------- index.jsx (modularização para a exportação das hooks implementadas)
+
+------ tests (Testes utilizados no projeto)
+-------- index.test.jsx (testes)
+
+------ testHelpers (Implementação de um mock para o banco de dados firebase)
+-------- fireStore.js (Mock para o firestore)
+
+

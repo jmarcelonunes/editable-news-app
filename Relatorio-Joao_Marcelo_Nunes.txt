@@ -1,0 +1,43 @@
+Data	|	Horas Trabalhadas	|	Tipo Tarefa			| 	Descrição da Tarefa Realizada
+	
+19/11	|	1:10h			|	projetar;			|	Criação do repositório no gitHub;
+
+21/11		5:45h		    	|	codificar módulo;		|																			Implementação da conexão com banco de dados;
+											Implementação de autenticação de usuário;
+											Implementação do cadastro de noticias;
+
+29/11	|	3:30h			|	revisar código do módulo;       |
+						Rodar o verificador estático 
+						e retirar warnings;			Refatoração inicial da interface de login e de cadastro;
+
+10/12	|	4:10h			|	codificar módulo;
+						Rodar o verificador estático 	|	Implementação da exclusão de notícias;
+						e retirar warnings;			Implementação da edição de notícias;
+						Estudar aulas e				Implementação da adição de imagens para notícias;
+						laboratórios relacionados ;		Estudo sobre testes com firebase;
+											Estudo sobre testes de interface;
+
+11/12 |		2:20h			|	revisar projetos;		|	Revisão do código;
+						Rodar o verificador estático 		Adicionar assertivas de entrada, saída e argumentação
+						e retirar warnings;
+						revisar especificações
+						especificar as funções;
+						especificar os módulos;
+
+12/12 |		4:00h			|	redigir casos de teste;		|	Estudo e implementação de um mock para o firebase.
+						realizar os testes;			Permitindo assim a implementação dos 									revisar casos de teste;			testes em um firebase local sem interferir 
+						realizar os testes;			com o banco de dados real;
+						instrumentar verificando 		Estudo e implementação de teste de interface;
+						a cobertura;					
+
+13/12|		1:20h			|	revisar projetos;		| 	Realização da documentação de leia-me
+						Rodar o verificador estático 		Checagem do código e correção de bugs
+						e retirar warnings;			Correção de código devido a falha nos testes.
+						revisar casos de teste;
+						revisar código do módulo;				 			
+						
+						
+											
+											
+											
+											
