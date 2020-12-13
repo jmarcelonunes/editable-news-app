@@ -22,6 +22,10 @@ export const DropDiv = styled.div`
   width: 100%;
   height: 200px;
   padding: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Container = styled.div`
@@ -61,4 +65,18 @@ export const SubmitButton = styled(Button)`
   width: 120px !important;
   background-color: #005484 !important;
   color: white !important;
+`;
+
+export const CancelUploadButton = styled(Button)`
+  width: 160px !important;
+  background-color: #ff0000 !important;
+  color: white !important;
+  margin-left: 20px !important;
+`;
+
+export const FilesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
 `;
