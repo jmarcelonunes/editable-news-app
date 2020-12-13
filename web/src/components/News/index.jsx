@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { DeleteButton } from './style';
+import { Typography } from '@material-ui/core';
+import {
+  DeleteButton, MainContentContainer, NewsContainer,
+  EditButton, CenterContainer, ImageContainer,
+} from './style';
 import NavBar from '../NavBar/index';
 import firebase from '../../firebase';
 
@@ -54,16 +58,21 @@ const News = () => {
    *
    */
   const deleteNews = useCallback(async (id) => {
-    const db = firebase.firestore();
-    try {
-      await db.collection('noticias').doc(id).delete();
-      alert('Notícia excluída com sucesso!');
-      // const arrayAux = noticias.filter((noticia) => noticia.id !== id);
-      setNoticias((n) => n.filter((noticia) => noticia.id !== id));
-      // Necessita fazer a atualizacao do estado
-    } catch (err) {
-      console.log(err);
-      alert('Erro ao excluída notícia', err);
+    // eslint-disable-next-line no-restricted-globals
+    const confirmDelete = confirm('Deseja mesmo excluir esta notícia?');
+
+    if (confirmDelete) {
+      const db = firebase.firestore();
+      try {
+        await db.collection('noticias').doc(id).delete();
+        alert('Notícia excluída com sucesso!');
+        // const arrayAux = noticias.filter((noticia) => noticia.id !== id);
+        setNoticias((n) => n.filter((noticia) => noticia.id !== id));
+        // Necessita fazer a atualizacao do estado
+      } catch (err) {
+        console.log(err);
+        alert('Erro ao excluir notícia', err);
+      }
     }
   }, [setNoticias]);
 
@@ -73,64 +82,42 @@ const News = () => {
   return (
     <>
       <NavBar />
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <MainContentContainer>
         <div
           style={{
             width: '30%',
             height: '100%',
           }}
         />
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <CenterContainer>
           {noticias && noticias.length ? (
             noticias.map((noticia) => (
-              <div
+              <NewsContainer
                 key={noticia.id}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  marginBottom: 20,
-                  borderBottomWidth: 2,
-                  borderBottomStyle: 'solid',
-                  borderBottomColor: '#005484',
-                }}
               >
-                <h2 style={{ margin: 0 }}>{noticia.titulo}</h2>
-                <h4 style={{ margin: 0 }}>{noticia.subtitulo}</h4>
-                <p style={{ margin: 0, marginBottom: 20 }}>
-                  Escrito por: {noticia.autor}
-                </p>
-                <h3 style={{ margin: 0 }}>{noticia.corpo}</h3>
+                <Typography variant="h4">{noticia.titulo}</Typography>
+                <Typography variant="h6">{noticia.subtitulo}</Typography>
+                <Typography variant="subtitle2">Escrito por: {noticia.autor}</Typography>
+                <Typography variant="h6" style={{ marginBottom: 20 }}>{noticia.corpo}</Typography>
+                {noticia.imgURL
+                  ? <ImageContainer style={{ backgroundImage: `url(${noticia.imgURL})` }} />
+                  : <></>}
                 <div>
                   <DeleteButton type="button" onClick={() => deleteNews(noticia.id)}>Excluir</DeleteButton>
-                  <Link style={{ textDecoration: 'none' }} to={`/registerNews/${noticia.id}`}>
-                    <button type="button">Editar</button>
-                  </Link>
+                  <EditButton type="button">
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/registerNews/${noticia.id}`}>
+                      Editar
+                    </Link>
+                  </EditButton>
                 </div>
-              </div>
+              </NewsContainer>
             ))
           ) : (
             <></>
           )}
-        </div>
+        </CenterContainer>
         <div style={{ width: '30%', height: '100%' }} />
-      </div>
+      </MainContentContainer>
     </>
   );
 };
