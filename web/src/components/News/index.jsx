@@ -36,15 +36,19 @@ const News = () => {
     const collection = db.collection('noticias');
 
     const noticiasFirestore = [];
-    collection.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        noticiasFirestore.push({
-          id: doc.id,
-          ...doc.data(),
+    collection
+      .orderBy('timestamp', 'desc')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          noticiasFirestore.push({
+            id: doc.id,
+            ...doc.data(),
+          });
         });
+        console.log('noticias -----', noticiasFirestore);
+        setNoticias(noticiasFirestore);
       });
-      setNoticias(noticiasFirestore);
-    });
   }, []);
 
   /**
