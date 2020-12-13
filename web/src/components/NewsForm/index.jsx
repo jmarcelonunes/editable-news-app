@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import TextField from '@material-ui/core/TextField';
+import { Typography } from '@material-ui/core';
 import firebase from '../../firebase';
 import NavBar from '../NavBar/index';
 import {
   Form, MainContainer, PaddingContainer,
   FormContainer, Container, DropDiv, SubmitButton,
+  CancelUploadButton, FilesContainer,
 } from './style';
 
 /**
@@ -36,6 +38,10 @@ const NewsForm = () => {
    * Estado para o autor da notícia
    */
   const [author, setAuthor] = useState('');
+  /**
+   * Estado para mostrar ou não área de upload de imagem
+   */
+  const [showDropzone, setShowDropzone] = useState(true);
 
   /**
    * Hook utilizada para a funcionalidade do dropzone (drop de imagens)
@@ -60,7 +66,9 @@ const NewsForm = () => {
      * gera um elemento de lista para a visualização do usuário
      */
     <li key={file.path} style={{ listStyleType: 'none' }}>
-      {file.path} - {file.size} bytes
+      <Typography>
+        {file.path} - {file.size} bytes
+      </Typography>
     </li>
   ));
 
@@ -132,6 +140,15 @@ const NewsForm = () => {
   }, [id]);
 
   /**
+   * Hook utilizado para verificar a quantidade de arquivos enviados
+   */
+  useEffect(() => {
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      setShowDropzone(false);
+    }
+  }, [acceptedFiles]);
+
+  /**
    * handleSubmit - função responsável pelo envio dos dados do formulário
    * para o banco de dados
    *
@@ -154,7 +171,7 @@ const NewsForm = () => {
       /**
        * Checagem para ver se alguma imagem foi carregada pelo usuário
        */
-      if (acceptedFiles[0]) {
+      if (acceptedFiles[0] && !showDropzone) {
         /**
          * Caso o usuário tenha carregado a imagem,
          * a imagem é salva no storage e depois a url
@@ -245,15 +262,31 @@ const NewsForm = () => {
               onChange={(e) => setBody(e.target.value)}
               style={{ marginBottom: 10 }}
             />
-            <DropDiv {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-              <input {...getInputProps()} />
-              <p style={{ textAlign: 'center' }}>Arraste e solte um arquivo .jpeg</p>
-            </DropDiv>
-            <div>
-              <br />
-              <ul>{files}</ul>
-              <br />
-            </div>
+            {!showDropzone
+              ? (
+                <FilesContainer>
+                  <ul>{files}</ul>
+                  <CancelUploadButton
+                    type="button"
+                    onClick={() => {
+                      setShowDropzone(true);
+                    }}
+                  >
+                    Cancelar
+                  </CancelUploadButton>
+                </FilesContainer>
+              )
+              : <></>}
+            {showDropzone
+              ? (
+                <DropDiv {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
+                  <input {...getInputProps()} />
+                  <Typography>Arraste e solte um arquivo .jpeg</Typography>
+                </DropDiv>
+              )
+              : (
+                <></>
+              )}
             <SubmitButton type="submit">
               Cadastrar
             </SubmitButton>
