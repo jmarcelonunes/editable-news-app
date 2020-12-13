@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Button, TextField } from '@material-ui/core';
 import {
-  LoginButton, LoginForm, LoginInput, LoginText, Container, Content, SignUpLink,
+  LoginButton, LoginForm, LoginText, Container, Content, SignUpLink,
 } from './style';
 import { useAuth } from '../../hooks/auth';
 
@@ -59,26 +60,31 @@ const SignIn = () => {
           onSubmit={handleSubmit}
         >
           <LoginText>Área de notícias</LoginText>
-          <LoginInput
-            type="text"
-            name="email"
-            placeholder="Email"
+          <TextField
+            id="email-signin"
+            label="Email"
             value={email}
+            variant="outlined"
             onChange={(e) => setEmail(e.target.value)}
+            style={{ marginBottom: 20, width: '100%' }}
           />
-          <LoginInput
+          <TextField
             type="password"
-            name="password"
-            placeholder="Senha"
+            id="password-signin"
+            label="Senha"
             value={password}
+            variant="outlined"
             onChange={(e) => setPassword(e.target.value)}
+            style={{ marginBottom: 20, width: '100%' }}
           />
           <LoginButton type="submit">
             Entrar
           </LoginButton>
-          <Link style={{ textDecoration: 'none' }} to="/signup">
-            <SignUpLink>Cadastrar</SignUpLink>
-          </Link>
+          <Button color="inherit">
+            <Link style={{ textDecoration: 'none' }} to="/signup">
+              <SignUpLink>Cadastrar</SignUpLink>
+            </Link>
+          </Button>
 
         </LoginForm>
       </Content>
