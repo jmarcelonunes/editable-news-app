@@ -22,7 +22,7 @@ export const LoginForm = styled.form`
     padding: 20px;
     width: 360px;
     margin-top: 20px;
-    height: 40%;
+    height: 50% !important;
 `;
 
 export const Background = styled.div`

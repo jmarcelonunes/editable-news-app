@@ -22,7 +22,7 @@ export const SignUpForm = styled.form`
     padding: 20px;
     width: 360px;
     margin-top: 20px;
-    height: 40%;
+    height: 55%;
 `;
 
 export const Container = styled.div`
