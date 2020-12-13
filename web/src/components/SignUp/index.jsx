@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { TextField } from '@material-ui/core';
 import { useAuth } from '../../hooks/auth';
 import {
-  SignUpButton, SignUpForm, SignUpText, Container, SignUpInput, Content,
+  SignUpButton, SignUpForm, SignUpText, Container, Content,
 } from './style';
 
 /**
@@ -60,28 +61,34 @@ const SignUp = () => {
           onSubmit={handleSubmit}
         >
           <SignUpText>Cadastrar</SignUpText>
-          <SignUpInput
-            type="text"
-            name="email"
-            placeholder="Email"
+          <TextField
+            id="email-signup"
+            label="Email"
+            variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ marginBottom: 20, width: '100%' }}
           />
-          <SignUpInput
-            type="text"
-            name="name"
-            placeholder="Nome"
+          <TextField
+            id="name-signup"
+            label="Nome"
+            variant="outlined"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            style={{ marginBottom: 20, width: '100%' }}
           />
-          <SignUpInput
+          <TextField
             type="password"
-            name="password"
-            placeholder="Senha"
+            id="password-signup"
+            label="Senha"
             value={password}
+            variant="outlined"
             onChange={(e) => setPassword(e.target.value)}
+            style={{ marginBottom: 20, width: '100%' }}
           />
-          <SignUpButton type="submit">Cadastrar</SignUpButton>
+          <SignUpButton color="inherit" type="submit">
+            Cadastrar
+          </SignUpButton>
         </SignUpForm>
       </Content>
     </Container>

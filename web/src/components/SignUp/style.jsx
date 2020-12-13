@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -32,32 +33,16 @@ export const Container = styled.div`
   margin: 0px;
 `;
 
-export const SignUpInput = styled.input`
-    width: 100%;
-    margin-bottom: 20px;
-    height:30px;
-`;
-
-export const SignUpButton = styled.button`
-    width: 100%;
-    background-color:#005484;
-    color: #fff;
-    border-color: #367fa9;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    margin-bottom: 10px;
+export const SignUpButton = styled(Button)`
+  width: 120px !important;
+  background-color: #005484 !important;
+  color: white !important;
 `;
 
 export const SignUpText = styled.h2`
     margin: 0;
-    font-size: 20px;
-    color:#666;
+    font-size: 26px;
+    color: black;
     text-align: center;
     padding: 0 20px 20px 20px;
 `;
