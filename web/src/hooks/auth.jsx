@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
         );
       } catch (error) {
         // Handle error
-        console.log(error.message);
+        alert(error.message);
       }
     },
     [setData],
