@@ -1,0 +1,7 @@
+Data	|	Horas Trabalhadas	|	Tipo Tarefa			| 	Descrição da Tarefa Realizada
+
+18/11   |   1:00h               |   Planejamento        |   Criação do primeiro sprint do projeto
+
+2/12    |   1:00h               |   Documentação        |   Criação do diagrama de classe
+
+3/12    |   0:30h               |   Documentação        |   Criação do diagrama de uso
